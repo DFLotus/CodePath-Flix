@@ -64,11 +64,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    //Miss spelled
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
   
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Find the selected movie
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        
+        let movie = movies[indexPath.row]
+        
+        let detailsViewController = segue.destination as! MoiveDetailsViewController
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+    }
 
 }
 
